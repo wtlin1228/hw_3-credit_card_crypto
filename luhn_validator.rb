@@ -9,21 +9,23 @@ module LuhnValidator
     # TODO: use the integers in nums_a to validate its last check digit
     sum = 0
     nums_a.reverse.each_with_index do |n, i|
-    	if i != 0 
-	    	if (i % 2) != 0 
-	    		(n*2).to_s.split('').each do |t|
-	    			sum = sum + t.to_i
-	    		end
-	    	else
-	    		sum = sum + n
-	    	end
-    	end
+      if i != 0 
+	    if (i % 2) != 0 
+	      if n*2 >= 10
+	    	sum = sum + n*2 - 9
+	      else
+	    	sum = sum + n*2
+	      end
+	    else
+	      sum = sum + n
+	    end
+      end
     end
 
     if (sum * 9) % 10 == nums_a.last
-    	return true
+      return true
     else
-    	return false
+      return false
     end
 
   end
